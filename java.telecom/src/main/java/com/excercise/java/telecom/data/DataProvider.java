@@ -2,6 +2,7 @@ package com.excercise.java.telecom.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.excercise.java.telecom.model.Customer;
 import com.excercise.java.telecom.model.PhoneNumber;
@@ -36,7 +37,27 @@ public class DataProvider {
     }
 
     public List<PhoneNumber> getPhoneNumbers() {
+        System.out.println("phoneNumbers size: " + phoneNumbers.size());
         return phoneNumbers;
+    }
+
+    public boolean activateNumber(String number) {
+        final Optional<PhoneNumber> phoneNumber = phoneNumbers.stream()
+                .filter(pNumber -> pNumber.getNumber().equals(number))
+                .findFirst();
+        if (phoneNumber.isPresent()) {
+            final PhoneNumber num = phoneNumber.get();
+            if (!num.hasBeenActivated()) {
+                num.setHasBeenActivated(true);
+                return true;
+            } else {
+                System.out.println("Given number already activated");
+                return false;
+            }
+        } else {
+            System.out.println("Cannot find phone number");
+            return false;
+        }
     }
 
     @Override
