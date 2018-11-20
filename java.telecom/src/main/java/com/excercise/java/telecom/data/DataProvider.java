@@ -9,9 +9,9 @@ import com.excercise.java.telecom.model.PhoneNumber;
 
 public class DataProvider {
 
-    private final List<Customer> customers = new ArrayList<>();
+    private List<Customer> customers = new ArrayList<>();
 
-    private final List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
 
     private static final DataProvider instance = new DataProvider();
 
@@ -41,7 +41,15 @@ public class DataProvider {
         return phoneNumbers;
     }
 
-    public boolean activateNumber(String number) {
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public Optional<PhoneNumber> activateAndGet(String number) {
         final Optional<PhoneNumber> phoneNumber = phoneNumbers.stream()
                 .filter(pNumber -> pNumber.getNumber().equals(number))
                 .findFirst();
@@ -49,14 +57,14 @@ public class DataProvider {
             final PhoneNumber num = phoneNumber.get();
             if (!num.hasBeenActivated()) {
                 num.setHasBeenActivated(true);
-                return true;
+                return phoneNumber;
             } else {
                 System.out.println("Given number already activated");
-                return false;
+                return phoneNumber;
             }
         } else {
             System.out.println("Cannot find phone number");
-            return false;
+            return phoneNumber;
         }
     }
 

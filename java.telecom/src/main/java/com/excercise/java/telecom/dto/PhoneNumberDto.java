@@ -8,7 +8,7 @@ public class PhoneNumberDto {
 
     private final boolean hasBeenActivated;
 
-    private final long ownerId;
+    private long ownerId;
 
     private PhoneNumberDto(String number, boolean hasBeenActivated, long ownerId) {
         this.number = number;
@@ -16,8 +16,17 @@ public class PhoneNumberDto {
         this.ownerId = ownerId;
     }
 
+    private PhoneNumberDto(String number, boolean hasBeenActivated) {
+        this.number = number;
+        this.hasBeenActivated = hasBeenActivated;
+    }
+
     public static PhoneNumberDto createNew(PhoneNumber phoneNumber) {
-        return new PhoneNumberDto(phoneNumber.getNumber(), phoneNumber.hasBeenActivated(), phoneNumber.getId());
+        return new PhoneNumberDto(phoneNumber.getNumber(), phoneNumber.hasBeenActivated(), phoneNumber.getOwner().getId());
+    }
+
+    public static PhoneNumberDto createWithoutOwner(String number, boolean hasBeenActivated) {
+        return new PhoneNumberDto(number, hasBeenActivated);
     }
 
     public String getNumber() {
