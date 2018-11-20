@@ -62,8 +62,7 @@
      * Activate phone number
      *
      * @param number
-     * @return PhoneNumber object with activated status if found. 
-     *         Returns without owner and not activated if not found or log message if already activated
+     * @return PhoneNumber object with activated status if found. Returns without owner and not activated if not found or log message if already activated
      */
 	
      API endpoint: PUT - /phonenumber/update/{number}
