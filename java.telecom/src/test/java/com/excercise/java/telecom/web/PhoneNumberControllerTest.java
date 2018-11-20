@@ -1,7 +1,6 @@
 package com.excercise.java.telecom.web;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isIn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -48,7 +47,6 @@ public class PhoneNumberControllerTest {
         mvc.perform(get("/phonenumber/get/all")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(8)))
                 .andExpect(jsonPath("$[0].number", isIn(possbileNumberValues)))
                 .andExpect(jsonPath("$[0].hasBeenActivated", is(false)))
                 .andExpect(jsonPath("$[1].number", isIn(possbileNumberValues)))

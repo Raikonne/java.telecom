@@ -17,6 +17,6 @@ public class Application {
     @PostConstruct
     public void initSampleData() {
         DataProvider.getInstance().createNewCustomerWithPhoneNumber(1L, "testFornameOne", "testSurnameOne", 1L, "07471885134");
-        DataProvider.getInstance().createNewCustomerWithPhoneNumber(2L, "testFornameTwo", "testSurnameTwo", 2L, "07471885134");
+        DataProvider.getInstance().createNewCustomerWithPhoneNumber(2L, "testFornameTwo", "testSurnameTwo", 2L, "07471885135");
     }
 }
